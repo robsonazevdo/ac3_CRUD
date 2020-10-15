@@ -16,10 +16,15 @@ class Aluno():
         self.numero = numero
         self.complemento = complemento
 
+sql_create = '''CREATE TABLE Hair2you (RA integer 
+                PRIMARY KEY NOT NULL, nome varchar(50) NOT NULL, email_do_aluno 
+                varchar(50) NOT NULL, Logradouro varchar(50) NOT NULL,
+                numero varchar(5) NOT NULL, cep varchar(10) NOT NULL,
+                complemento varchar(20)
+                )'''
 
 
-
-def create_table():
+'''def create_table():
     connection = psycopg2.connect(
        
         host = "dbimpacta.postgresql.dbaas.com.br",
@@ -35,7 +40,7 @@ def create_table():
     cursor.close()
     connection.close()
 
-create_table()
+create_table()'''
 
 
 @app.route('/inicio')
@@ -46,7 +51,7 @@ def inicio():
 
 
 @app.route('/aluno', methods=['GET', 'POST'])
-def seus_dados():
+def aluno():
     if request.method == "POST":
         ra = request.form['ra']
         nome = request.form['nome']
@@ -59,7 +64,7 @@ def seus_dados():
         a = Aluno(ra, nome, email, logradouro, numero,complemento)
         sql_create.session.add(a)
         sql_create.commit()
-    
+    return render_template('obrigado.html') 
 
 
 @app.route('/cadastro')
