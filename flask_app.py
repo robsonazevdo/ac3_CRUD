@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify
-import psycopg2
+#import psycopg2
 from datetime import datetime
 from pytz import timezone
 
@@ -48,6 +48,10 @@ create_table()'''
 def inicio():
     return render_template('index.html')
 
+
+@app.route('/login1', methods=['GET', 'POST'])
+def login1():
+    return render_template('obrigado.html')
 
 
 @app.route('/aluno', methods=['GET', 'POST'])

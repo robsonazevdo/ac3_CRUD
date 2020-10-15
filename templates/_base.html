@@ -16,8 +16,8 @@
   </head>
   <body>
 <header>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
-  <a class="navbar-brand text-light" href="{{ url_for('inicio') }}">Empresa</a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+  <a class="navbar-brand text-primary" href="{{ url_for('inicio') }}"><img src="static/img/logo.png" alt= "logo empresa"  height= "30"id="logo"></a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -25,17 +25,15 @@
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
-        <a class="nav-link text-light " href="{{ url_for('inicio') }}">Início </a>
+        <a class="nav-link text-dark " href="{{ url_for('inicio') }}">Início </a>
       </li>
-      
-      
-      <li class="nav-item active">
-        <a class="nav-link text-light " href="{{ url_for('cadastro') }}">Cadastro</a>
+     
+      <li class="nav-item active ">
+        <a class="nav-link text-dark " href="{{ url_for('cadastro') }}">Cadastro</a>
       </li>
     </ul>
-
     <div class="form-inline my-2 my-lg-0">
-      <a class="btn btn-outline-light" href="{{ url_for('login') }}" role="button">Fazer Login</a>
+      <a class="btn btn-outline-dark" href="{{ url_for('login') }}" role="button">Fazer Login</a>
     </div>
   </div>
 </nav>
