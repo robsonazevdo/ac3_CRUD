@@ -16,39 +16,61 @@ db = SQLAlchemy(app)
 
 class Hair2you(db.Model):
     ra = db.Column(db.Integer, primary_key=True, nullable=True)
-    nome = db.Column(db.String(50), nullable=True)
-    email = db.Column(db.String(50), nullable=True)
+    nome = db.Column(db.String(50), nullable=True, unique=True)
+    email = db.Column(db.String(50), nullable=True, unique=True)
     logradouro = db.Column(db.String(50), nullable=True)
     numero = db.Column(db.String(5), nullable=True)
     cep = db.Column(db.String(10), nullable=True)
     complemento = db.Column(db.String(20))
 
-sql_create = '''CREATE TABLE Hair2you (RA integer 
-                PRIMARY KEY NOT NULL, nome varchar(50) NOT NULL, email 
-                varchar(50) NOT NULL, Logradouro varchar(50) NOT NULL,
-                numero varchar(5) NOT NULL, cep varchar(10) NOT NULL,
-                complemento varchar(20)
-                )'''
+
 db.create_all()
+
  
-'''def create_table():
-    connection = psycopg2.connect(
-       
-        host = "dbimpacta.postgresql.dbaas.com.br",
-        user = "dbimpacta",
-        password = "impacta#2020",
-        dbname = "dbimpacta"
+sql_create = '''CREATE TABLE hair2you (RA integer 
+            PRIMARY KEY NOT NULL, nome varchar(50) NOT NULL UNIQUE, email 
+            varchar(50) NOT NULL UNIQUE, Logradouro varchar(50) NOT NULL ,
+            numero varchar(5) NOT NULL, cep varchar(10) NOT NULL,
+            complemento varchar(20)
+            )'''
 
-        
-    )
-    cursor = connection.cursor()
-    cursor.execute(sql_create)
-    connection.commit()
-    cursor.close()
-    connection.close()
 
-create_table()'''
+def create_table():
+    try:
+        connection = psycopg2.connect(
+            host = "dbimpacta.postgresql.dbaas.com.br",
+            user = "dbimpacta",
+            password = "impacta#2020",
+            dbname = "dbimpacta"
+        )
+        cursor = connection.cursor()
+        cursor.execute(sql_create)
+        connection.commit()
+        cursor.close()
+        connection.close()
+        print("Tabela criada")
+    except:
+        print("Erro ao criar a Tabela")            
 
+create_table()
+
+'''def inserir_aluno(ra, nome, email, Logradouro, numero, cep, complemento):
+    	try:
+            connection = psycopg2.connect(    
+                host = "dbimpacta.postgresql.dbaas.com.br",
+                user = "dbimpacta",
+                password = "impacta#2020",
+                dbname = "dbimpacta"
+            )
+            cursor = connection.cursor()
+            sql = "INSERT INTO hair2you (ra, nome, email, Logradouro, numero, cep, complemento) VALUES (%s, %s)"
+            cursor.execute(sql,[ra, nome, email, Logradouro, numero, cep, complemento])
+            connection.commit()
+            cursor.close()
+            connection.close()
+            print("Registro Inserido com sucesso")
+        except Exception as erro:
+            print(erro)'''
 
 @app.route('/inicio')
 @app.route('/')
@@ -64,7 +86,7 @@ def cadastro():
 
 @app.route('/login1', methods=['GET','POST'])
 def login1():
-    return render_template('obrigado.html')
+    return render_template('agenda.html')
 
 
 
@@ -83,7 +105,10 @@ def aluno():
         db.session.commit()
         return render_template('obrigado.html') 
     
-        
+
+@app.route('/agenda')
+def agenda():
+    return render_template('agenda.html')       
     
 
 @app.route('/obrigado')
