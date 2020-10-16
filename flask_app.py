@@ -14,7 +14,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///Impacta.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
-class Cadastro(db.Model):
+class Hair2you(db.Model):
     ra = db.Column(db.Integer, primary_key=True, nullable=True)
     nome = db.Column(db.String(50), nullable=True)
     email = db.Column(db.String(50), nullable=True)
@@ -71,7 +71,7 @@ def login1():
 @app.route('/aluno', methods=['GET', 'POST'])
 def aluno():
     if request.method == "POST":
-        aluno = Cadastro(ra = request.form['ra'],
+        aluno = Hair2you(ra = request.form['ra'],
                         nome = request.form['nome'],
                         email = request.form['email'], 
                         logradouro = request.form['endereco'], 
