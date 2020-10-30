@@ -1,8 +1,5 @@
 from flask import Flask, render_template, request, jsonify
 import psycopg2
-from datetime import datetime
-from pytz import timezone
-
 from flask_sqlalchemy import SQLAlchemy
 
 
@@ -54,23 +51,24 @@ def create_table():
 
 create_table()
 
-'''def inserir_aluno(ra, nome, email, Logradouro, numero, cep, complemento):
-    	try:
-            connection = psycopg2.connect(    
-                host = "dbimpacta.postgresql.dbaas.com.br",
-                user = "dbimpacta",
-                password = "impacta#2020",
-                dbname = "dbimpacta"
-            )
-            cursor = connection.cursor()
-            sql = "INSERT INTO hair2you (ra, nome, email, Logradouro, numero, cep, complemento) VALUES (%s, %s)"
-            cursor.execute(sql,[ra, nome, email, Logradouro, numero, cep, complemento])
-            connection.commit()
-            cursor.close()
-            connection.close()
-            print("Registro Inserido com sucesso")
-        except Exception as erro:
-            print(erro)'''
+def inserir_aluno(ra, nome, email, Logradouro, numero, cep, complemento):
+    try:
+        connection = psycopg2.connect(    
+            host = "dbimpacta.postgresql.dbaas.com.br",
+            user = "dbimpacta",
+            password = "impacta#2020",
+            dbname = "dbimpacta"
+        )
+        cursor = connection.cursor()
+        sql = "INSERT INTO hair2you (ra, nome, email, Logradouro, numero, cep, complemento) VALUES (%s, %s)"
+        cursor.execute(sql,[ra, nome, email, Logradouro, numero, cep, complemento])
+        connection.commit()
+        cursor.close()
+        connection.close()
+        print("Registro Inserido com sucesso")
+        
+    except Exception as erro:
+        print(erro)
 
 @app.route('/inicio')
 @app.route('/')
